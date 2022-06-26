@@ -1,0 +1,31 @@
+{
+  "name": "vite-plugin-i18n-tolgee",
+  "version": "0.1.0",
+  "description": "Vite plugin to leverage the power of the Tolgee localization platform in your projects",
+  "type": "module",
+  "main": "dist/index.js",
+  "repository": "git@github.com:borkenware/vite-plugin-i18n-tolgee.git",
+  "author": "Cynthia <cyyynthia@borkenware.com>",
+  "license": "BSD-3-Clause",
+  "engines": {
+    "node": ">= 16"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "acorn": "^8.7.1",
+    "estree-walker": "^3.0.1",
+    "magic-string": "^0.26.2",
+    "undici": "^5.5.1"
+  },
+  "devDependencies": {
+    "@types/estree": "^0.0.52",
+    "@types/node": "^18.0.0",
+    "rollup": "^2.75.7",
+    "typescript": "^4.7.4",
+    "vite": "^2.9.12",
+    "vitest": "^0.16.0"
+  }
+}
