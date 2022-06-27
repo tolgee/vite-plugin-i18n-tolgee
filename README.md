@@ -47,7 +47,7 @@ export default {
  - `projectId`: **Required**\* ID of the Tolgee project for the app
  - `apiKey`: **Required**\* API key to connect to Tolgee's REST API
  - `markdown`: Enable support of Markdown in source strings. See [Markdown support](#markdown-support). Defaults to `false`.
- - `runtime`: Either `vanilla` (default), `react`, `preact`, or a function. See [RUNTIME.md](RUNTIME.md) for more details.
+ - `extensions`: An extension, or an array of extensions. See [EXTENSIONS.md](EXTENSIONS.md) for more details.
 
 \*While required for the plugin to operate as expected, if not provided the plugin will still function in development
 mode, and will require the use of a flag to run a production build (or build will error out). In this configuration,
@@ -61,10 +61,6 @@ the use of this plugin.
 You'll need basic ICU to get started, and this isn't covered by this guide. You should give the official docs from
 Unicode a look [here](https://unicode-org.github.io/icu/userguide/format_parse/messages/).
 
-> Note: below is general documentation of how to use with the vanilla runtime. While provided (and custom) runtimes try
-> to be transparent and function the same, it's recommended to check [RUNTIME.md](RUNTIME.md) for all the details and
-> quirks of other runtimes.
-
 The default export of `virtual:i18n` is all you'll need. We'll name it `t` here. It's a function that takes 3 arguments:
 the string key, the source string, and eventual arguments in form of an object.
 
@@ -75,9 +71,9 @@ static. Values can obviously be dynamic, that's the point of having them.
 If, for any reason, you need the raw ICU string in the current locale, you can use `t.raw`. It takes the same
 parameters as `t` minus the arguments, and have the same requirements regarding static analysis.
 
-By default, the runtime will pick the browser locale. To change the locale, you can use `t.setLocale`. Note that the
-vanilla runtime will **not** not refresh strings, you are responsible for handling this in your application. Other
-runtimes may provide this feature, refer to their respective documentation.
+By default, the runtime will pick the browser locale. To change the locale, you can use `t.setLocale`. Note that
+changing the locale will **not** cause strings to refresh. Some extensions may however provide this functionality as
+part of an integration. Check their documentation for more details.
 
 ### Markdown support
 When enabled, the plugin can convert Markdown from source strings into corresponding HTML markup. Only a subset of
@@ -86,7 +82,7 @@ Markdown is implemented:
  - `*`, `_`: Italics
  - `__`: Underline (Note: non-standard)
  - `~~`: Strike-through
- - ` ` `: Inline code
+ - `` ` ``: Inline code
  - `[name](link)`: Link
  - Plain http links are **not** automatically converted into clickable links
 
