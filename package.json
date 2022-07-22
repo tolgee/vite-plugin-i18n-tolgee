@@ -4,7 +4,7 @@
   "description": "Vite plugin to leverage the power of the Tolgee localization platform in your projects",
   "type": "module",
   "main": "dist/index.js",
-  "repository": "git@github.com:borkenware/vite-plugin-i18n-tolgee.git",
+  "repository": "git@github.com:tolgee/vite-plugin-i18n-tolgee.git",
   "author": "Cynthia <cyyynthia@borkenware.com>",
   "license": "BSD-3-Clause",
   "engines": {

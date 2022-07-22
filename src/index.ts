@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Borkenware, All rights reserved.
+ * Copyright (c) 2022 Tolgee, All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,12 +30,14 @@ import type { Plugin } from 'vite'
 import { parse } from 'acorn'
 import MagicString from 'magic-string'
 
+export type Extension = string | (() => void) // More specific types required
+
 export type I18nPluginConfig = {
   tolgeeUrl?: string
   projectId?: string
   apiKey?: string
   markdown?: boolean
-  runtime?: string | (() => void) // More specific types required
+  extensions?: Extension | Extension[]
 }
 
 const VIRTUAL_PACKAGE = 'virtual:i18n'
@@ -45,11 +47,7 @@ export default function i18n (_cfg: I18nPluginConfig): Plugin {
   return {
     name: 'vite-plugin-i18n-tolgee',
     resolveId: (id) => {
-      return id === VIRTUAL_PACKAGE
-        ? INTERNAL_VIRTUAL_PACKAGE
-        : id === INTERNAL_VIRTUAL_PACKAGE
-          ? id
-          : void 0
+      return id === VIRTUAL_PACKAGE || id === INTERNAL_VIRTUAL_PACKAGE ? id : void 0
     },
     transform: (code) => {
       const ms = new MagicString(code)
@@ -66,6 +64,6 @@ export default function i18n (_cfg: I18nPluginConfig): Plugin {
         code: ms.toString(),
         map: ms.generateMap(),
       }
-    }
+    },
   }
 }
